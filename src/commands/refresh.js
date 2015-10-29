@@ -10,14 +10,14 @@ var __ = function(program, output, logger, config, trello, translator){
   .callback(function(type){
 
     // Defaults!
-    if (typeof type != "string"){
+    if (typeof type !== "string"){
       type = "all";
     }
 
     var cachePath = config.get("configPath") + config.get("translationCache");
     var cacheFile = {};
     try {
-      cacheFile = JSON.parse(fs.readFileSync(cachePath));
+      cacheFile = JSON.parse(fs.readFileSync(cachePath, "utf-8"));
     } catch (e){
       // Nothing! 
     }
@@ -27,7 +27,7 @@ var __ = function(program, output, logger, config, trello, translator){
     cacheFile.translations.boards = cacheFile.translations.boards || {};
     cacheFile.translations.lists = cacheFile.translations.lists || {};
 
-    if (type == 'orgs' || type == 'all'){
+    if (type === 'orgs' || type === 'all'){
       trello.get("/1/members/me/organizations", function(err, data) {
         if (err) throw err;
         _.each(data, function(item){
@@ -39,7 +39,7 @@ var __ = function(program, output, logger, config, trello, translator){
       });
     }
 
-    if (type == 'lists' || type == 'boards' || type == 'all'){
+    if (type === 'lists' || type === 'boards' || type === 'all'){
       trello.get("/1/members/me/boards", function(err, data) {
         if (err) throw err;
         _.each(data, function(item){
@@ -51,7 +51,7 @@ var __ = function(program, output, logger, config, trello, translator){
       });
     }
 
-    if (type == 'lists' || type == 'all'){
+    if (type === 'lists' || type === 'all'){
       async.each(Object.keys(cacheFile.translations.boards), function(board, callback){
         trello.get("/1/boards/"+board+"/lists", function(err, data) {
           if (err) throw err;
@@ -71,5 +71,5 @@ var __ = function(program, output, logger, config, trello, translator){
 
     }
   });
-}
+};
 module.exports = __;

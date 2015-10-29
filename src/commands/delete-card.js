@@ -45,11 +45,11 @@ var __ = function(program, output, logger, config, trello, translator){
         var card = data[i];
 
         // We only want cards from the list we specified
-        if (card.idList != listId){
+        if (card.idList !== listId){
           continue;
         }
 
-        if (card.name == opts.title || !opts.title){
+        if (card.name === opts.title || !opts.title){
           foundCards.push(card);
         }
       }
@@ -74,7 +74,7 @@ var __ = function(program, output, logger, config, trello, translator){
         });
 
         list.start();
-      } else if (foundCards.length == 1){
+      } else if (foundCards.length === 1){
         var card = foundCards[0];
         if (opts.title){
           deleteCard(card.id);
@@ -109,6 +109,6 @@ var __ = function(program, output, logger, config, trello, translator){
     });
   }
 
-}
+};
 module.exports = __;
 

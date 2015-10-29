@@ -3,8 +3,9 @@
 // npm dependencies
 var program = require("nomnom"),
     Trello  = require("node-trello"),
-    config  = require("nconf")
-    fs      = require("fs");
+    config  = require("nconf"),
+    fs      = require("fs"),
+    __dirname;
 
 // Load config
 config.file(__dirname + "/../config.json");

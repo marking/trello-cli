@@ -9,7 +9,7 @@ var Translator = function(logger, config){
   var cachePath = config.get("configPath") + config.get("translationCache");
   var cacheFile = {};
   try {
-    cacheFile = JSON.parse(fs.readFileSync(cachePath));
+    cacheFile = JSON.parse(fs.readFileSync(cachePath, "utf-8"));
   } catch (e){
     // Nothing
   }
@@ -49,7 +49,7 @@ Translator.prototype.getBoardIdByName = function(name){
   this.logger.debug("Looking up board by name: " + name);
   var boards = this.cache.translations.boards;
   for (var i in boards){
-    if (boards[i][1].toLowerCase() == name){
+    if (boards[i][1].toLowerCase() === name){
       return i;
     }
   }
@@ -64,14 +64,14 @@ Translator.prototype.getListIdByBoardNameAndListName = function(board, list){
   this.logger.debug("Looking up list by name: " + list);
   var lists = this.cache.translations.lists;
   for (var i in lists){
-    if (lists[i][0] == boardId && lists[i][1].toLowerCase() == list){
+    if (lists[i][0] === boardId && lists[i][1].toLowerCase() === list){
       return i;
     }
   }
 
   throw new Error("Unknown List");
-}
+};
 
 module.exports = function(logger, config){
   return new Translator(logger, config);
-}
+};

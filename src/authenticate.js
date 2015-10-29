@@ -13,7 +13,7 @@ Auth.prototype.loadAuthCache = function(){
   var authFile = {};
   // Load auth cache file
   try {
-    authFile = JSON.parse(fs.readFileSync(this.config.get("configPath") + this.config.get("authCache")));
+    authFile = JSON.parse(fs.readFileSync(this.config.get("configPath") + this.config.get("authCache"), "utf-8"));
   } catch (e) {
     this.logger.debug("No auth file found: " + this.config.get("configPath") + this.config.get("authCache"));
     // Create the file
@@ -24,7 +24,7 @@ Auth.prototype.loadAuthCache = function(){
 
   return authFile;
 
-}
+};
 
 Auth.prototype.setToken = function(token){
   var authCache = this.loadAuthCache();
@@ -32,7 +32,7 @@ Auth.prototype.setToken = function(token){
   this.writeAuthFile(JSON.stringify(authCache), function(){
     this.logger.debug("Auth file written");
   }.bind(this));
-}
+};
 
 Auth.prototype.getToken = function(){
   if (!this.cachedToken){
@@ -40,7 +40,7 @@ Auth.prototype.getToken = function(){
   }
 
   return this.cachedToken;
-}
+};
 
 Auth.prototype.writeAuthFile = function(content, callback){
   // Make sure the path exists
@@ -48,7 +48,7 @@ Auth.prototype.writeAuthFile = function(content, callback){
     fs.mkdirSync(this.config.get("configPath"));
   } catch(e){
     // If it's not an issue where it already exists, rethrow
-    if (e.code != 'EEXIST'){
+    if (e.code !== 'EEXIST'){
       throw e;
     }
   }
@@ -57,7 +57,7 @@ Auth.prototype.writeAuthFile = function(content, callback){
   var path =this.config.get("configPath") + this.config.get("authCache");
   fs.writeFileSync(path, content);
   callback();
-}
+};
 
 Auth.prototype.check = function(){
   var authCache = this.loadAuthCache();
@@ -72,13 +72,13 @@ Auth.prototype.check = function(){
   }
 
   this.logger.debug("Authenticating user");
-}
+};
 
 Auth.prototype.run = function(){
   this.logger.debug("Authenticating user");
-}
+};
 
 module.exports = function(logger, output, config){
   logger.debug("Creating authentication module");
   return new Auth(logger, output, config);
-}
+};

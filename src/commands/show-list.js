@@ -1,3 +1,4 @@
+/* global fs */
 fs = require("fs");
 
 var __ = function(program, output, logger, config, trello, translator){
@@ -45,5 +46,5 @@ var __ = function(program, output, logger, config, trello, translator){
         }
       }});
   });
-}
+};
 module.exports = __;
