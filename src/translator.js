@@ -20,7 +20,7 @@ var Translator = function(logger, config){
   cacheFile.translations.lists = cacheFile.translations.lists || {};
 
   this.cache = cacheFile;
-}
+};
 
 Translator.prototype.getOrganisation = function(id){
   this.logger.debug("Looking up organisation: " + id);
@@ -29,7 +29,7 @@ Translator.prototype.getOrganisation = function(id){
     return undefined;
   }
   return item || "Org: " + id;
-}
+};
 
 Translator.prototype.getBoard = function(id){
   this.logger.debug("Looking up board: " + id);
@@ -42,7 +42,7 @@ Translator.prototype.getBoard = function(id){
     str += item[1];
   }
   return str || "Board: " + id;
-}
+};
 
 Translator.prototype.getBoardIdByName = function(name){
   name = name.toLowerCase();
@@ -55,7 +55,7 @@ Translator.prototype.getBoardIdByName = function(name){
   }
 
   throw new Error("Unknown Board");
-}
+};
 
 Translator.prototype.getListIdByBoardNameAndListName = function(board, list){
   var boardId = this.getBoardIdByName(board);

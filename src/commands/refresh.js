@@ -43,7 +43,7 @@ var __ = function(program, output, logger, config, trello, translator){
       trello.get("/1/members/me/boards", function(err, data) {
         if (err) throw err;
         _.each(data, function(item){
-          cacheFile.translations.boards[item.id] = [item.idOrganization, item.name]
+          cacheFile.translations.boards[item.id] = [item.idOrganization, item.name];
         });
 
         // Write it back to the cache file
@@ -56,7 +56,7 @@ var __ = function(program, output, logger, config, trello, translator){
         trello.get("/1/boards/"+board+"/lists", function(err, data) {
           if (err) throw err;
           _.each(data, function(item){
-            cacheFile.translations.lists[item.id] = [item.idBoard, item.name]
+            cacheFile.translations.lists[item.id] = [item.idBoard, item.name];
           });
 
           callback();

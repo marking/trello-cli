@@ -25,7 +25,6 @@ var __ = function(program, output, logger, config, trello, translator){
     logger.info("Showing assigned cards");
 
     // Grab our boards etc
-    var boardId = translator.getBoardIdByName(opts.board);
     var listId = translator.getListIdByBoardNameAndListName(opts.board, opts.list);
 
     trello.get("/1/lists/" + listId + "", {"cards": "open"}, function(err, data) {

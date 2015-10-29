@@ -29,7 +29,7 @@ if (!fs.existsSync(__dirname + "/../config.json")){
 }
 
 // Hacky, but it'll do for now
-if (process.argv[2] == 'set-auth'){
+if (process.argv[2] === 'set-auth'){
   Authentication.setToken(process.argv[3]);
 } else {
   // Make sure we have an API key etc
